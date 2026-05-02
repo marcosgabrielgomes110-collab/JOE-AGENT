@@ -1,0 +1,19 @@
+# Joi — Configuração
+
+joi:
+  name: "Joi"
+  model: "llama-3.3-70b-versatile"
+
+agent:
+  max_turns: 5
+  debug: false
+
+memory:
+  context_size: 10
+  persist_dir: "./data/sessions/"
+
+skills_dir: "./skills/"
+
+heartbeat:
+  enabled: false
+  interval: 300  # segundos
