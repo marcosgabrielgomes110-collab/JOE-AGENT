@@ -11,12 +11,16 @@ REACT_TEMPLATE = """Você é um agente autônomo que resolve tarefas usando tool
 
 Toda resposta DEVE seguir **estritamente** um destes formatos:
 
-### Para usar uma ferramenta:
+### Para usar uma ou MAIS ferramentas:
 ```
 Thought: [seu raciocínio em português]
 Action: [nome exato da tool]
 Action Input: {{"param1": "valor1", "param2": "valor2"}}
+Action: [outra tool se necessário]
+Action Input: {{"param1": "valor1"}}
 ```
+
+VOCÊ PODE chamar quantas tools precisar em uma ÚNICA resposta — o sistema executa todas antes de responder.
 
 ### Para dar a resposta final:
 ```
@@ -32,6 +36,7 @@ Final Answer: [resposta completa e direta para o usuário]
 5. SEMPRE termine com Final Answer quando tiver a informação suficiente.
 6. Não repita tools que já foram chamadas a menos que os parâmetros mudem.
 7. Não adicione texto fora do formato. Cada resposta DEVE começar com Thought:.
+8. Para tarefas que exigem MÚLTIPLAS ferramentas, chame todas de uma vez no mesmo turno — não precisa esperar.
 {examples_section}
 ## Ferramentas disponíveis
 {tools}
@@ -54,6 +59,13 @@ Action Input: {"cidade": "Fortaleza"}""",
 Thought: Vou listar os arquivos .py com o comando ls.
 Action: terminal
 Action Input: {"comando": "ls *.py"}""",
+
+    "multi_tool": """Usuário: Quero saber a hora atual e a versão do Python.
+Thought: Preciso de duas informações independentes. Vou chamar ambas de uma vez.
+Action: hora
+Action Input: {}
+Action: terminal
+Action Input: {"comando": "python3 --version"}""",
 }
 
 
