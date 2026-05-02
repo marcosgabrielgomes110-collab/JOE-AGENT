@@ -19,6 +19,7 @@ for dirpath, dirnames, _ in os.walk(ROOT):
 import capataz as cp
 from capataz import SessionManager
 from tools.builtins import register_all
+from tools.obsidian import register_all as register_obsidian
 from utils.llm import configure, call as _llm_call
 from utils.logger import event as _log
 from utils.interface import (
@@ -56,6 +57,7 @@ def main():
     cp.set_llm(_llm_call)
 
     register_all(cp)
+    register_obsidian(cp)
 
     for name, entry in cp.tools._registry.items():
         original_fn = entry["fn"]
